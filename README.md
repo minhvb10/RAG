@@ -3,3 +3,5 @@ This is a basic question answering system using RAG. The input will be a PDF fil
 # Requirement
 To use google/embeddinggemma-300m you must create a hugging face token and grant access to the "Google's Gemma models family" group. After that, you must create an API key from google ai studio for using the gemini-2.5-pro model. 
 # Demo
+https://github.com/user-attachments/assets/c73cdf08-f047-4947-82b6-0c99e024e3a1
+
