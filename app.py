@@ -1,5 +1,5 @@
 import streamlit as st
-from openai import OpenAI, AuthenticationError, RateLimitError, APIError
+from groq import Groq
 from typing import Optional
 
 st.set_page_config(
@@ -13,16 +13,16 @@ st.sidebar.title("⚙️ Cấu hình")
 st.sidebar.write("---")
 
 api_key = st.sidebar.text_input(
-    "OpenAI API Key",
+    "Groq API Key",
     type="password",
-    placeholder="sk-...",
-    help="Nhập API key của bạn từ OpenAI"
+    placeholder="gsk_...",
+    help="Nhập API key của bạn từ Groq"
 )
 
 model = st.sidebar.selectbox(
     "Chọn model",
-    ["gpt-4o", "gpt-4-turbo", "gpt-3.5-turbo"],
-    help="Chọn model GPT để sử dụng"
+    ["openai/gpt-oss-20b", "llama-3.3-70b-versatile", "llama-3.1-8b-instant", "openai/gpt-oss-120b"],
+    help="Chọn model Groq để sử dụng"
 )
 
 temperature = st.sidebar.slider(
@@ -81,11 +81,11 @@ if clear_button:
 
 if submit_button:
     if not api_key:
-        st.error("❌ Vui lòng nhập API key OpenAI trong thanh bên")
+        st.error("❌ Vui lòng nhập API key Groq trong thanh bên")
     elif not question.strip():
         st.error("❌ Vui lòng nhập câu hỏi")
     else:
-        client = OpenAI(api_key=api_key)
+        client = Groq(api_key=api_key)
         
         with st.spinner("⏳ Đang xử lý câu hỏi..."):
             try:
@@ -132,10 +132,6 @@ Nhiệm vụ của bạn:
                 
                 st.rerun()
                 
-            except AuthenticationError:
-                st.error("❌ API Key không hợp lệ. Vui lòng kiểm tra lại.")
-            except RateLimitError:
-                st.error("❌ Bạn đã vượt quá giới hạn API. Vui lòng thử lại sau.")
             except Exception as e:
                 st.error(f"❌ Lỗi: {str(e)}")
 
