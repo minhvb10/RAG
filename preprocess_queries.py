@@ -2,7 +2,6 @@ import json
 import re
 from pathlib import Path
 
-# Từ điển chuyển đổi viết tắt thành đầy đủ (giống như trong preprocess.py)
 ABBREVIATIONS = {
     r'\btp\b': 'thành phố',
     r'\btp\.': 'thành phố',
@@ -47,27 +46,16 @@ ABBREVIATIONS = {
 }
 
 def expand_abbreviations(text):
-    """
-    Chuyển đổi các viết tắt thành đầy đủ
-    """
     for abbr, full_form in ABBREVIATIONS.items():
         text = re.sub(abbr, full_form, text, flags=re.IGNORECASE)
     return text
 
 def preprocess_text(text):
-    """
-    Tiền xử lý văn bản: chuyển thành chữ thường và mở rộng viết tắt
-    """
-    # Chuyển sang chữ cái thường
     text = text.lower()
-    # Mở rộng các viết tắt
     text = expand_abbreviations(text)
     return text
 
 def preprocess_queries(input_file, output_file):
-    """
-    Đọc queries.jsonl, tiền xử lý text
-    """
     processed_count = 0
     
     print(f"Đang xử lý file {input_file}...")
@@ -80,7 +68,6 @@ def preprocess_queries(input_file, output_file):
                 try:
                     query = json.loads(line.strip())
                     
-                    # Tiền xử lý text
                     if 'text' in query and query['text']:
                         query['text'] = preprocess_text(query['text'])
                     
@@ -101,9 +88,7 @@ def preprocess_queries(input_file, output_file):
         print(f"✗ Lỗi khi xử lý: {e}")
 
 if __name__ == "__main__":
-    # Đường dẫn input và output
     input_path = Path(__file__).parent / "queries.jsonl"
     output_path = Path(__file__).parent / "queries_preprocessed.jsonl"
     
-    # Xử lý file
     preprocess_queries(str(input_path), str(output_path))

@@ -1,7 +1,7 @@
-torch>=2.0.0
-numpy>=1.24.0
-tqdm>=4.65.0
-sentence-transformers>=2.2.0
-faiss-cpu>=1.7.4
-streamlit>=1.28.0
-groq>=0.4.0
+sentence-transformers 
+faiss-gpu-cu12 
+networkx 
+pandas 
+numpy 
+scikit-learn 
+tqdm 

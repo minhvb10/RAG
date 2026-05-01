@@ -2,7 +2,6 @@ import json
 import re
 from pathlib import Path
 
-# Từ điển chuyển đổi viết tắt thành đầy đủ
 ABBREVIATIONS = {
     r'\btp\b': 'thành phố',
     r'\btp\.': 'thành phố',
@@ -58,9 +57,7 @@ def preprocess_text(text):
     """
     Tiền xử lý văn bản: chuyển thành chữ thường và mở rộng viết tắt
     """
-    # Chuyển sang chữ cái thường
     text = text.lower()
-    # Mở rộng các viết tắt
     text = expand_abbreviations(text)
     return text
 
@@ -79,14 +76,12 @@ def load_and_preprocess_corpus(input_file, output_file):
                 try:
                     sample = json.loads(line.strip())
                     
-                    # Kiểm tra trùng lặp _id
                     if sample.get('_id') in seen_ids:
                         print(f"  Bỏ qua dòng {line_num}: _id '{sample.get('_id')}' đã tồn tại")
                         continue
                     
                     seen_ids.add(sample.get('_id'))
                     
-                    # Tiền xử lý text và title
                     if 'text' in sample and sample['text']:
                         sample['text'] = preprocess_text(sample['text'])
                     
@@ -99,7 +94,6 @@ def load_and_preprocess_corpus(input_file, output_file):
                     print(f"  Lỗi JSON tại dòng {line_num}: {e}")
                     continue
         
-        # Ghi ra file output
         print(f"Đang ghi {len(processed_samples)} samples vào file {output_file}...")
         with open(output_file, 'w', encoding='utf-8') as f:
             for sample in processed_samples:
@@ -114,9 +108,7 @@ def load_and_preprocess_corpus(input_file, output_file):
         print(f"✗ Lỗi khi xử lý: {e}")
 
 if __name__ == "__main__":
-    # Đường dẫn input và output
     input_path = "corpus.jsonl"
     output_path = "corpus_preprocessed.jsonl"
     
-    # Xử lý file
     load_and_preprocess_corpus(input_path, output_path)
