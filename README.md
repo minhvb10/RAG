@@ -4,9 +4,9 @@ Hệ thống hỏi-đáp sử dụng Retrieval-Augmented Generation (RAG) để 
 
 ## Mô hình sử dụng
 
-- **Embedding Model**: `bkai-foundation-models/vietnamese-bi-encoder` (Vietnamese Bi-Encoder)
-- **Reranking Model**: `BAAI/bge-reranker-v2-m3` (BGE Reranker v2-m3)
-- **Retrieval**: FAISS (Facebook AI Similarity Search)
+- **Embedding Model**: `bkai-foundation-models/vietnamese-bi-encoder` 
+- **Reranking Model**: `BAAI/bge-reranker-v2-m3` 
+- **Vector database**: FAISS 
 
 ## Yêu cầu
 
@@ -29,6 +29,6 @@ pip install -r requirements.txt
 
 ## Kết quả
 
-- Việc finetune embedding model đã cải thiện hiệu suất khi truy vấn, với việc không sử dụng reranker thì recall@1 tăng từ 0.42 lên 0.5 còn khi sử dụng reranker thì recall@1 tăng nhẹ từ 0.63 lên xấp xỉ 0.65
+- Sau khi áp dụng fine-tuning, hiệu quả truy hồi của pipeline Naive RAG có sử dụng reranker được cải thiện so với mô hình BGE-M3 gốc. Cụ thể, Recall@1 tăng từ 0.6345 lên 0.6485, Recall@5 tăng từ 0.8331 lên 0.8655, và Recall@10 tăng từ 0.8725 lên 0.8985.
 
 
