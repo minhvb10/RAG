@@ -29,6 +29,6 @@ pip install -r requirements.txt
 
 ## Kết quả
 
-- Sau khi áp dụng fine-tuning, hiệu quả truy hồi của pipeline Naive RAG có sử dụng reranker được cải thiện so với mô hình BGE-M3 gốc. Cụ thể, Recall@1 tăng từ 0.6345 lên 0.6485, Recall@5 tăng từ 0.8331 lên 0.8655, và Recall@10 tăng từ 0.8725 lên 0.8985.
+- Sau khi áp dụng fine-tuning, hiệu quả truy hồi của pipeline Naive RAG có sử dụng reranker được cải thiện so với mô hình embedding gốc. Cụ thể, Recall@1 tăng từ 0.6345 lên 0.6485, Recall@5 tăng từ 0.8331 lên 0.8655, và Recall@10 tăng từ 0.8725 lên 0.8985.
 
 
